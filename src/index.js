@@ -3,10 +3,9 @@ import $ from 'jquery';
 $(document).ready(() => {
 
   $.get( "https://wordwatch-api.herokuapp.com/api/v1/top_word", (data) => {
-    let topWord = Object.keys(data.word)[0];
-    let count = data.word[topWord];
-    topWord = capitalize(topWord);
-    $('.top-word h3').text(`Top word from Word Watch API: ${topWord} ${count}`);
+    const topWord = Object.keys(data.word)[0];
+    const count = data.word[topWord];
+    $('.top-word h3').text(`Top word from Word Watch API: ${capitalize(topWord)} ${count}`);
   });
 
 
