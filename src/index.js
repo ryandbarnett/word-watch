@@ -4,8 +4,8 @@ $(document).ready(() => {
 
   $.get( "https://wordwatch-api.herokuapp.com/api/v1/top_word", (data) => {
     let topWord = Object.keys(data.word)[0];
-    let count = data.word.vincerulz;
-    topWord = topWord.substr(0,1).toUpperCase()+ topWord.substr(1);
+    let count = data.word[topWord];
+    topWord = capitalize(topWord);
     $('.top-word h3').text(`Top word from Word Watch API: ${topWord} ${count}`);
   });
 
@@ -14,6 +14,10 @@ $(document).ready(() => {
     const words = $(e.target).prev().val();
     breakDown(words);
   });
+
+  const capitalize = (word) => {
+    return word.substr(0,1).toUpperCase()+ word.substr(1);
+  }
 
   const breakDown = (words) => {
     words.split(' ').forEach(word => postWord(word));
