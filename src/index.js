@@ -1,23 +1,19 @@
 import $ from 'jquery';
 
 $(document).ready(() => {
-
-  $.get( "https://wordwatch-api.herokuapp.com/api/v1/top_word", (data) => {
-    const topWord = Object.keys(data.word)[0];
-    const count = data.word[topWord];
-    updateTopWord(topWord, count);
-  });
-
+  updateTopWord();
 
   $('.text-submission button').click(function(e) {
     const words = $(e.target).prev().val();
     breakDown(words);
   });
-
 });
 
-const updateTopWord = (word, count) => {
-  $('.top-word h3').text(`Top word from Word Watch API: ${capitalize(word)} ${count}`);
+const updateTopWord = async () => {
+  const data = await $.get("https://wordwatch-api.herokuapp.com/api/v1/top_word");
+  const topWord = Object.keys(data.word)[0];
+  const count = data.word[topWord];
+  $('.top-word h3').text(`Top word from Word Watch API: ${capitalize(topWord)} ${count}`);
 }
 
 const capitalize = (word) => {
